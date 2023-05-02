@@ -16,6 +16,10 @@ struct News: Decodable {
     let publishedAt: String?
 }
 
+extension News: Identifiable {
+    var id: String { url! }
+}
+
 struct NewsEnvelope: Decodable {
     let status: String
     let totalResults: Int

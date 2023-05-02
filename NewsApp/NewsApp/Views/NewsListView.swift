@@ -16,6 +16,7 @@ struct NewsListView: View {
             news in NewsCell(news: news,
                              image: Image(uiImage: self.imageData[news.urlToImage] == nil ? UIImage(systemName: "globe")! : UIImage(data: self.imageData[news.urlToImage]!)!))
             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
     }

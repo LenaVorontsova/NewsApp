@@ -23,9 +23,11 @@ struct NewsHome: View {
 }
 
 struct NewsHome_Previews: PreviewProvider {
+    @StateObject static var newsBookmarkVM = NewsBookmarkViewModel()
     static var previews: some View {
         NavigationView {
             NewsHome()
+                .environmentObject(newsBookmarkVM)
         }
     }
 }
