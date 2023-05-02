@@ -20,6 +20,7 @@
 		8400694C2A0128A2006FFF3A /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400694B2A0128A2006FFF3A /* NewsListView.swift */; };
 		8400694E2A0129D9006FFF3A /* NewsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400694D2A0129D9006FFF3A /* NewsHome.swift */; };
 		840069502A013289006FFF3A /* NewsBookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400694F2A013289006FFF3A /* NewsBookmarkViewModel.swift */; };
+		840069522A0156DC006FFF3A /* NewsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840069512A0156DC006FFF3A /* NewsTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		8400694B2A0128A2006FFF3A /* NewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
 		8400694D2A0129D9006FFF3A /* NewsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsHome.swift; sourceTree = "<group>"; };
 		8400694F2A013289006FFF3A /* NewsBookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsBookmarkViewModel.swift; sourceTree = "<group>"; };
+		840069512A0156DC006FFF3A /* NewsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				840069492A01229F006FFF3A /* NewsCell.swift */,
 				8400694B2A0128A2006FFF3A /* NewsListView.swift */,
 				8400694D2A0129D9006FFF3A /* NewsHome.swift */,
+				840069512A0156DC006FFF3A /* NewsTabView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				840069422A00F5E3006FFF3A /* NetworkService.swift in Sources */,
 				840069482A00FB44006FFF3A /* NewsListVM.swift in Sources */,
 				840069442A00FA1B006FFF3A /* NewsViewModel.swift in Sources */,
+				840069522A0156DC006FFF3A /* NewsTabView.swift in Sources */,
 				8400693C29FEACCA006FFF3A /* News.swift in Sources */,
 				8400692A29FEA734006FFF3A /* ContentView.swift in Sources */,
 				8400693F29FEADF9006FFF3A /* API.swift in Sources */,
