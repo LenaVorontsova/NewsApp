@@ -17,17 +17,15 @@ struct NewsHome: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             NewsListView(newsCollection: self.newsListVM.news,
-                         imageData: self.newsListVM.imageData)
+                         imageData: self.newsListVM.imageData, newsList: newsListVM)
         }
     }
 }
 
 struct NewsHome_Previews: PreviewProvider {
-    @StateObject static var newsBookmarkVM = NewsBookmarkViewModel()
     static var previews: some View {
         NavigationView {
             NewsHome()
-                .environmentObject(newsBookmarkVM)
         }
     }
 }

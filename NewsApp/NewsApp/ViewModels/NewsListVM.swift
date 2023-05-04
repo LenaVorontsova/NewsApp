@@ -10,9 +10,28 @@ import Foundation
 class NewsListVM: ObservableObject {
     @Published var news = [NewsViewModel]()
     @Published var imageData = [String: Data]()
+    @Published var bookmarks = [NewsViewModel]()
     
     func loadData() {
         getNews()
+    }
+    
+    func isBookmarked(news: News) -> Bool {
+        return bookmarks.first { news.title == $0.title } != nil
+    }
+    
+    func addBookmark(news: News) {
+        guard !isBookmarked(news: news) else {
+            return
+        }
+        bookmarks.insert(NewsViewModel(news: news), at: 0 )
+    }
+    
+    func removeBookmark(news: News) {
+        guard let index = bookmarks.firstIndex(where: { $0.id == news.id} ) else {
+            return
+        }
+        bookmarks.remove(at: index)
     }
     
     private func getNews() {

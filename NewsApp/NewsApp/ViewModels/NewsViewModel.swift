@@ -10,6 +10,8 @@ import Foundation
 struct NewsViewModel {
     let news: News
     
+    var id: String { url }
+    
     var author: String {
         return news.author ?? "Unknown"
     }
