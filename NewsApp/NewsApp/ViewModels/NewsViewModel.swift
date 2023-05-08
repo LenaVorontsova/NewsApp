@@ -7,39 +7,62 @@
 
 import Foundation
 
-struct NewsViewModel {
-    let news: News
+class NewsViewModel: ObservableObject {
+    @Published var news: [News] = []
+    let apiKey = "e5642ec49a244ad98f0a81772729d70c"
     
-    var id: String { url }
-    
-    var author: String {
-        return news.author ?? "Unknown"
-    }
-    var title: String {
-        return news.title ?? ""
-    }
-    var description: String {
-        return news.description ?? ""
-    }
-    var urlToImage: String {
-        return news.urlToImage ?? "https://sportishka.com/uploads/posts/2022-04/1650710287_10-sportishka-com-p-melburn-krasivo-foto-11.jpg"
-    }
-    var url: String {
-        return news.url ?? ""
-    }
-    var publishedAt: String {
-        var dateText = (news.publishedAt!.replacingOccurrences(of: "T", with: " "))
-        var arr = dateText.components(separatedBy: ":")
-        arr.removeLast()
-        dateText = arr.joined(separator: ":")
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "yyyy-MM-dd hh:mm"
-        if let date = dateFormater.date(from: dateText) {
-            dateFormater.dateFormat = "dd.MM.yyyy hh:mm"
-            let newDate = dateFormater.string(from: date)
-            return newDate
-        } else {
-            return ""
+    func fetchNews() {
+        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(apiKey)") else {
+            print("Invalid URL")
+            return
         }
+
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error fetching news: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                print("Unknown error fetching news")
+                return
+            }
+
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            do {
+                let decodedResponse = try JSONDecoder().decode(NewsResponse.self, from: data)
+                if !decodedResponse.articles.isEmpty {
+                    DispatchQueue.main.async {
+                        self.news = decodedResponse.articles
+                    }
+                } else {
+                    print("Empty")
+                }
+            } catch let error {
+                print("Error decoding news: \(error)")
+            }
+
+        }.resume()
     }
+    
+    func getImage(urlString: String, completion: @escaping (((Data)?) -> Void)) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil, let data = data else {
+                completion(nil)
+                return
+            }
+            completion(data)
+        }.resume()
+    }
+    
 }

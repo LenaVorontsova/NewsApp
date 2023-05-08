@@ -14,13 +14,27 @@ struct News: Decodable {
     let urlToImage: String?
     let url: String?
     let publishedAt: String?
+    
+    func getImage(urlString: String, completion: @escaping (((Data)?) -> Data?)) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil, let data = data else {
+                completion(nil)
+                return
+            }
+            completion(data)
+        }.resume()
+    }
 }
 
 extension News: Identifiable {
     var id: String { url! }
 }
 
-struct NewsEnvelope: Decodable {
+struct NewsResponse: Decodable {
     let status: String
     let totalResults: Int
     let articles: [News]

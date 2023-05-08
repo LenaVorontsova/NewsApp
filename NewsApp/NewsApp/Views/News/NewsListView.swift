@@ -8,19 +8,14 @@
 import SwiftUI
 
 struct NewsListView: View {
-    let newsCollection: [NewsViewModel]
-    let imageData: [String: Data]
-    @ObservedObject var newsList: NewsListVM
+    @EnvironmentObject var newsViewModel: NewsViewModel
     
     var body: some View {
-        List(self.newsCollection, id: \.url) {
-            news in NewsCell(
-                news: news,
-                image: Image(uiImage: self.imageData[news.urlToImage] == nil ? UIImage(systemName: "globe")! : UIImage(data: self.imageData[news.urlToImage]!)!),
-                newsList: newsList)
-            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-            .listRowSeparator(.hidden)
+        List(newsViewModel.news) { news in
+            NewsListItemView(news: news)
         }
-        .listStyle(.plain)
+        .onAppear {
+            newsViewModel.fetchNews()
+        }
     }
 }
